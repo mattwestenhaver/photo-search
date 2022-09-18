@@ -1,7 +1,13 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
-  swcMinify: true,
-}
+    reactStrictMode: true,
+    swcMinify: true,
+    images: {
+        domains: ['images.pexels.com'],
+    },
+    env: {
+        BASE_URL: process.env.BASE_URL,
+    },
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;

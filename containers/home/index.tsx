@@ -7,7 +7,7 @@ import PhotosContainer from '../photos';
 import styles from '../../styles/Home.module.css';
 
 // utils
-import { searchByQuery } from '../../utils/photos';
+import { searchByQuery, getPhotosByPage } from '../../utils/photos';
 
 // types
 import type { PhotoResponse } from '../../types/photos';
@@ -21,14 +21,21 @@ const HomepageContainer: React.FC<Props> = ({ data }: Props) => {
     const [searchResults, setSearchResults] = useState<PhotoResponse | null>(
         null
     );
+    const [previousSearch, setPreviousSearch] = useState<string>('nature');
 
     const handleImageSearch = async (e: React.SyntheticEvent) => {
         e.preventDefault();
         if (searchRef.current?.value) {
             const newPhotos = await searchByQuery(searchRef.current.value);
+            setPreviousSearch(searchRef.current.value);
             setSearchResults(newPhotos);
             searchRef.current.value = '';
         }
+    };
+
+    const handlePagination = async (page: number) => {
+        const newPhotos = await getPhotosByPage(previousSearch, page);
+        setSearchResults(newPhotos);
     };
 
     return (
@@ -39,9 +46,15 @@ const HomepageContainer: React.FC<Props> = ({ data }: Props) => {
                 <button type="submit">Search</button>
             </form>
             {!!searchResults ? (
-                <PhotosContainer data={searchResults} />
+                <PhotosContainer
+                    data={searchResults}
+                    handlePagination={handlePagination}
+                />
             ) : (
-                <PhotosContainer data={data} />
+                <PhotosContainer
+                    data={data}
+                    handlePagination={handlePagination}
+                />
             )}
         </div>
     );

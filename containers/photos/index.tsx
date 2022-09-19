@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Pagination from './components/pagination';
 
 // types
-import type { PhotoResponse } from '../../types/photos';
+import type { Photo, PhotoResponse } from '../../types/photos';
 
 // styles
 import styles from '../../styles/Home.module.css';
@@ -13,11 +13,13 @@ import styles from '../../styles/Home.module.css';
 type Props = {
     data: PhotoResponse;
     handlePagination: (page: number) => void;
+    handlePhotoSelect: (photo: Photo) => void;
 };
 
 const PhotosContainer: React.FC<Props> = ({
     data,
     handlePagination,
+    handlePhotoSelect,
 }: Props) => {
     return (
         <>
@@ -30,7 +32,11 @@ const PhotosContainer: React.FC<Props> = ({
                 {!!data.photos.length ? (
                     data.photos.map((photo) => {
                         return (
-                            <div key={photo.id} className={styles.photoWrapper}>
+                            <div
+                                key={photo.id}
+                                className={styles.photoWrapper}
+                                onClick={() => handlePhotoSelect(photo)}
+                            >
                                 <Image
                                     className={styles.photo}
                                     loading="lazy"

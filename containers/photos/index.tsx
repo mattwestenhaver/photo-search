@@ -1,6 +1,9 @@
 import React from 'react';
 import Image from 'next/image';
 
+// components
+import Pagination from './components/pagination';
+
 // types
 import type { PhotoResponse } from '../../types/photos';
 
@@ -18,21 +21,10 @@ const PhotosContainer: React.FC<Props> = ({
 }: Props) => {
     return (
         <>
-            <div className={styles.pagination}>
-                <button
-                    className={styles.paginationButton}
-                    onClick={() => handlePagination(data.page - 1)}
-                >
-                    previous
-                </button>
-                <div>Page: {data.page}</div>
-                <button
-                    className={styles.paginationButton}
-                    onClick={() => handlePagination(data.page + 1)}
-                >
-                    next
-                </button>
-            </div>
+            <Pagination
+                currentPage={data.page}
+                handlePagination={handlePagination}
+            />
             <div className={styles.photosContainer}>
                 {!!data.photos.length ? (
                     data.photos.map((photo) => {
@@ -53,6 +45,10 @@ const PhotosContainer: React.FC<Props> = ({
                     <div>No photos available</div>
                 )}
             </div>
+            <Pagination
+                currentPage={data.page}
+                handlePagination={handlePagination}
+            />
         </>
     );
 };

@@ -1,0 +1,43 @@
+.modalBackground {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(17, 17, 17, 0.8);
+    z-index: 0;
+}
+
+.modalPhotoWrapper {
+    background-color: #6b6b6b;
+    text-align: center;
+    color: black;
+    padding: 24px 24px 12px 24px;
+    border-radius: 6px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+}
+
+.modalClose {
+    cursor: pointer;
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    color: rgb(202, 202, 202);
+}
+
+.photographerInfo {
+    display: flex;
+    justify-content: center;
+}
+
+.photographerLink {
+    margin-left: 6px;
+}
+
+.photographerLink:hover {
+    text-decoration: underline;
+}

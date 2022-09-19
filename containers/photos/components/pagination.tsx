@@ -1,7 +1,7 @@
 import React from 'react';
 
 // styles
-import styles from '../../../styles/Home.module.css';
+import styles from '../../../styles/Pagination.module.css';
 
 type Props = {
     currentPage: number;
@@ -20,7 +20,7 @@ const Pagination: React.FC<Props> = ({
                 className={styles.paginationButton}
                 onClick={() => handlePagination(currentPage - 1)}
             >
-                previous
+                Previous
             </button>
             <div>
                 Page: {currentPage} of {totalResults / 10}
@@ -29,7 +29,7 @@ const Pagination: React.FC<Props> = ({
                 className={styles.paginationButton}
                 onClick={() => handlePagination(currentPage + 1)}
             >
-                next
+                Next
             </button>
         </div>
     );

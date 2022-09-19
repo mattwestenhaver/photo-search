@@ -3,6 +3,7 @@ export type Photo = {
     alt: string;
     photographer: string;
     photographer_url: string;
+    url: string;
     height: number;
     width: number;
     src: {

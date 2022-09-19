@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 // styles
-import styles from '../../../styles/Home.module.css';
+import styles from '../../../styles/Modal.module.css';
 
 // types
 import type { Photo } from '../../../types/photos';
@@ -13,16 +14,31 @@ type Props = {
 };
 
 const PhotoModal: React.FC<Props> = ({ photo, handlePhotoSelect }: Props) => {
+    useEffect(() => {
+        if (photo) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'unset';
+        }
+    }, [photo]);
+
     if (!photo) {
         return null;
     }
 
     return (
-        <div
-            className={styles.modalWrapper}
-            onClick={() => handlePhotoSelect(null)}
-        >
+        <>
+            <div
+                className={styles.modalBackground}
+                onClick={() => handlePhotoSelect(null)}
+            />
             <div key={photo.id} className={styles.modalPhotoWrapper}>
+                <div
+                    className={styles.modalClose}
+                    onClick={() => handlePhotoSelect(null)}
+                >
+                    ✕
+                </div>
                 <Image
                     loading="lazy"
                     src={photo.src.original}
@@ -30,8 +46,17 @@ const PhotoModal: React.FC<Props> = ({ photo, handlePhotoSelect }: Props) => {
                     width={1200}
                     height={800}
                 />
+                <div>{photo.alt}</div>
+                <div className={styles.photographerInfo}>
+                    <div>Photographer:</div>
+                    <div className={styles.photographerLink}>
+                        <Link href={photo.photographer_url}>
+                            {photo.photographer}
+                        </Link>
+                    </div>
+                </div>
             </div>
-        </div>
+        </>
     );
 };
 

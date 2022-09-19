@@ -5,11 +5,13 @@ import styles from '../../../styles/Home.module.css';
 
 type Props = {
     currentPage: number;
+    totalResults: number;
     handlePagination: (page: number) => void;
 };
 
 const Pagination: React.FC<Props> = ({
     currentPage,
+    totalResults,
     handlePagination,
 }: Props) => {
     return (
@@ -20,7 +22,9 @@ const Pagination: React.FC<Props> = ({
             >
                 previous
             </button>
-            <div>Page: {currentPage}</div>
+            <div>
+                Page: {currentPage} of {totalResults / 10}
+            </div>
             <button
                 className={styles.paginationButton}
                 onClick={() => handlePagination(currentPage + 1)}

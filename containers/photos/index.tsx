@@ -23,13 +23,14 @@ const PhotosContainer: React.FC<Props> = ({
         <>
             <Pagination
                 currentPage={data.page}
+                totalResults={data.total_results}
                 handlePagination={handlePagination}
             />
             <div className={styles.photosContainer}>
                 {!!data.photos.length ? (
                     data.photos.map((photo) => {
                         return (
-                            <div key={photo.id}>
+                            <div key={photo.id} className={styles.photoWrapper}>
                                 <Image
                                     className={styles.photo}
                                     loading="lazy"
@@ -47,6 +48,7 @@ const PhotosContainer: React.FC<Props> = ({
             </div>
             <Pagination
                 currentPage={data.page}
+                totalResults={data.total_results}
                 handlePagination={handlePagination}
             />
         </>
